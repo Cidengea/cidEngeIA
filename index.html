@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decifra Sonhos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    textarea, input, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #6200ee;
+      color: white;
+      cursor: pointer;
+    }
+    .resultado {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .oculto {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Decifra Sonhos - Jogo do Bicho</h1>
+  <textarea id="campoSonho" placeholder="Digite aqui o que você sonhou..."></textarea>
+  <button onclick="interpretarSonho()">Interpretar Sonho</button>
+
+  <div id="areaPagamento" class="resultado oculto">
+    <p>Para ver os palpites, realize o pagamento de R$1,00:</p>
+    <button onclick="realizarPagamento()">Pagar via WhatsApp/Pix</button>
+  </div>
+
+  <div id="resultado" class="resultado oculto"></div>
+
+  <script>
+    const dicionario = {
+      'cobra': {numero: '09', animal: 'Cobra', significado: 'Transformação, mistério'},
+      'cachorro': {numero: '05', animal: 'Cachorro', significado: 'Lealdade, proteção'},
+      'gato': {numero: '14', animal: 'Gato', significado: 'Independência, mistério'},
+      'dinheiro': {numero: '16', animal: 'Leão', significado: 'Poder, sucesso'},
+      'avião': {numero: '22', animal: 'Tigre', significado: 'Viagens, rapidez'},
+    };
+
+    let palpites = [];
+
+    function interpretarSonho() {
+      const texto = document.getElementById('campoSonho').value.toLowerCase();
+      palpites = [];
+      
+      for (const palavra in dicionario) {
+        if (texto.includes(palavra)) {
+          const p = dicionario[palavra];
+          palpites.push(`${p.numero} - ${p.animal}<br><em>Significado:</em> ${p.significado}`);
+        }
+      }
+
+      if (palpites.length === 0) {
+        palpites.push('Nenhum palpite encontrado.');
+      }
+
+      document.getElementById('areaPagamento').classList.remove('oculto');
+      document.getElementById('resultado').classList.add('oculto');
+    }
+
+    function realizarPagamento() {
+      // Aqui poderia integrar com um sistema de pagamento real ou link para WhatsApp
+      document.getElementById('resultado').innerHTML = '<h3>Palpites Gerados:</h3>' + palpites.map(p => `<p>${p}</p>`).join('');
+      document.getElementById('resultado').classList.remove('oculto');
+    }
+  </script>
+</body>
+</html>
