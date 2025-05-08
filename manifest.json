@@ -1,0 +1,9 @@
+{
+  "name": "Simulador CDI",
+  "short_name": "Simulador",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#27ae60",
+  "icons": []
+}
